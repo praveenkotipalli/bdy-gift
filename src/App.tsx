@@ -162,7 +162,12 @@ function App() {
           className="relative z-10 h-screen w-screen overflow-y-auto"
           style={{ scrollBehavior: 'smooth' }}
         >
-          "Scroll Down"
+          <div className="h-screen w-full flex items-center justify-center">
+  <span className="text-white text-5xl font-bold animate-pulse drop-shadow-[0_0_12px_rgba(128,128,128,0.9)]">
+    Scroll Down
+  </span>
+</div>
+
           {/* Spacer at top to allow scrolling down */}
           <div className="h-screen" />
           
@@ -178,20 +183,32 @@ function App() {
                 rotationEnd="+=200%"
                 wordAnimationEnd="+=100%"
               >
-
-
-‎ 
-‎ 
-‎ 
-                When does a man die? When he is hit by a bullet? No! When he suffers a disease?
-                No! When he ate a soup made out of a poisonous mushroom?
-                No! A man dies when he is forgotten!
+                Oyeeee !!
+                ㅤㅤㅤㅤㅤㅤㅤㅤ
+                ㅤㅤㅤㅤㅤ
+                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+                So, I know we just met...
+                ㅤㅤㅤㅤㅤㅤ
+                ...but I heard it was your birthday.
+                ㅤㅤ
+                ㅤ
+                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+                I thought a generic "hbd" text was kind of boring.
+                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ ㅤ So I made you this instead.
+                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤㅤㅤHopeㅤyouㅤhaveㅤanㅤawesomeㅤday!!
               </ScrollReveal>
             </div>
           </div>
           
           {/* Extra space at bottom to enable scrolling */}
+          
           <div className="h-screen" />
+          <div className="text-white h-screen w-full flex flex-col items-center justify-center">
+  <span className="text-white text-5xl font-bold animate drop-shadow-[0_0_12px_rgba(128,128,128,0.9)]">
+    Happy Birthday!!
+  </span>
+  (btw, thats how i imagine you 👉🏼👈🏼)
+</div>
         </div>
       )}
     </div>
