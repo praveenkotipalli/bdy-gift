@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import './app.css';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -25,6 +26,25 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const elements = document.querySelectorAll('.reveal');
+  
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+  
+    elements.forEach(el => observer.observe(el));
+  
+    return () => observer.disconnect();
+  }, []);
+  
   // Check landscape orientation
   useEffect(() => {
     const checkOrientation = () => {
@@ -180,11 +200,11 @@ function App() {
                 enableBlur={true}
                 baseRotation={0}
                 blurStrength={10}
-                rotationEnd="+=200%"
-                wordAnimationEnd="+=100%"
+                rotationEnd="+=100%"
+                wordAnimationEnd="+=50%"
               >
                 Oyeeee !!
-                ㅤㅤㅤㅤㅤㅤㅤㅤ
+                {/* ㅤㅤㅤㅤㅤㅤㅤㅤ
                 ㅤㅤㅤㅤㅤ
                 ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
                 So, I know we just met...
@@ -195,8 +215,42 @@ function App() {
                 ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
                 I thought a generic "hbd" text was kind of boring.
                 ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ ㅤ So I made you this instead.
-                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤㅤㅤHopeㅤyouㅤhaveㅤanㅤawesomeㅤday!!
+                ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ ㅤㅤㅤHopeㅤyouㅤhaveㅤanㅤawesomeㅤday!! */}
               </ScrollReveal>
+              {/* <div className="mb-14"> */}
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              
+              
+              <div className=" text-3xl font-semibold mb-10 drop-shadow">
+  So, I know we just met...
+</div>
+
+<div className=" text-3xl font-semibold mb-10 drop-shadow">
+  ...but since it was your birthday.
+</div>
+
+<div className=" text-3xl font-semibold mb-10 drop-shadow">
+  I thought a generic "hbd" text was kind of boring.
+</div>
+
+<div className=" text-3xl font-semibold mb drop-shadow">
+  So I made you this instead.
+</div>
+
+<span className="reveal block text-xl mb-10 drop-shadow">
+  (you know that i had these exams and stuff going on, so i made  <br />as fast as i can
+  and had no time to do more, but i hope you like it)
+</span>
+
+<div className="reveal text-3xl font-semibold mb-20 drop-shadow">
+  Hope you have an awesome day!
+</div>
+<span className="reveal block text-xl font-semibold m drop-shadow ">
+  Scroll More....
+</span>
             </div>
           </div>
           
@@ -207,7 +261,7 @@ function App() {
   <span className="text-white text-5xl font-bold animate drop-shadow-[0_0_12px_rgba(128,128,128,0.9)]">
     Happy Birthday!!
   </span>
-  (btw, thats how i imagine you 👉🏼👈🏼)
+  <div className='drop-shadow text-xl'>(btw, thats how i imagine you 👉🏼👈🏼)</div>
 </div>
         </div>
       )}
