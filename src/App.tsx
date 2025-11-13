@@ -303,15 +303,15 @@ function App() {
   So I made you this instead.
 </div>
 
-<div className="reveal block text-xl mb-10 drop-shadow">
+<div className=" block text-xl mb-10 drop-shadow">
   (you know that i had these exams and stuff going on, so i made  <br />as fast as i can
   and had no time to do more, but i hope you like it)
 </div>
 
-<div className="reveal text-3xl font-semibold mb-20 drop-shadow">
+<div className=" text-3xl font-semibold mb-20 drop-shadow">
   Hope you have an awesome day!
 </div>
-<span className="reveal block text-xl font-semibold m drop-shadow ">
+<span className=" block text-xl font-semibold m drop-shadow ">
   Scroll More....
 </span>
             </div>
