@@ -9,6 +9,7 @@ function App() {
   const [showScrollContent, setShowScrollContent] = useState(false);
   const [isLandscape, setIsLandscape] = useState(window.innerWidth > window.innerHeight);
   const [assetsLoading, setAssetsLoading] = useState(true);
+  const [isBirthdayVisible, setIsBirthdayVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,7 @@ function App() {
   const triggerFireworks = useCallback(() => {
     const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 120 };
 
     const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
@@ -148,11 +149,13 @@ function App() {
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            setIsBirthdayVisible(true);
             if (!fireworksTriggeredRef.current) {
               fireworksTriggeredRef.current = true;
               triggerFireworks();
             }
           } else {
+            setIsBirthdayVisible(false);
             fireworksTriggeredRef.current = false;
           }
         });
@@ -166,6 +169,7 @@ function App() {
     observer.observe(target);
 
     return () => {
+      setIsBirthdayVisible(false);
       observer.unobserve(target);
     };
   }, [showScrollContent, triggerFireworks]);
@@ -238,6 +242,11 @@ function App() {
         }}
       />
 
+      <div
+        className="pointer-events-none absolute inset-0 z-10 bg-black transition-opacity duration-700"
+        style={{ opacity: isBirthdayVisible ? 0.45 : 0 }}
+      />
+
       {/* Scrollable text content */}
       {showScrollContent && (
         <div
@@ -303,15 +312,15 @@ function App() {
   So I made you this instead.
 </div>
 
-<div className="reveal block text-xl mb-10 drop-shadow">
+<div className=" block text-xl mb-10 drop-shadow">
   (you know that i had these exams and stuff going on, so i made  <br />as fast as i can
   and had no time to do more, but i hope you like it)
 </div>
 
-<div className="reveal text-3xl font-semibold mb-20 drop-shadow">
+<div className=" text-3xl font-semibold mb-20 drop-shadow">
   Hope you have an awesome day!
 </div>
-<span className="reveal block text-xl font-semibold m drop-shadow ">
+<span className=" block text-xl font-semibold m drop-shadow ">
   Scroll More....
 </span>
             </div>
