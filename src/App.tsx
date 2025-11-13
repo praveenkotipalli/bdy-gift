@@ -52,6 +52,7 @@ function App() {
         className="fixed inset-0 h-full w-full object-cover brightness-[80%]"
         src="/video/Tendou Arisu Maid Live2D - FULL.mp4"
         preload="auto"
+        muted
       />
       
       <audio
