@@ -50,13 +50,13 @@ function App() {
       <video
         ref={videoRef}
         className="fixed inset-0 h-full w-full object-cover brightness-[80%]"
-        src="static\video\Tendou Arisu Maid Live2D - FULL.mp4"
+        src="/video/Tendou Arisu Maid Live2D - FULL.mp4"
         preload="auto"
       />
       
       <audio
         ref={audioRef}
-        src="static\audio\Koi is Love BGM - Compressed.flac"
+        src="/audio/Koi is Love BGM - Compressed.flac"
         preload="auto"
       />
 
