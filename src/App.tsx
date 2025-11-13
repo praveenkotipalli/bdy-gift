@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import ScrollReveal from './ScrollReveal';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './app.css';
+import confetti from 'canvas-confetti';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,6 +12,36 @@ function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const happyBirthdayRef = useRef<HTMLDivElement>(null);
+  const fireworksTriggeredRef = useRef(false);
+
+  const triggerFireworks = useCallback(() => {
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+    const interval = window.setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return window.clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  }, []);
 
   const handleClick = () => {
     if (!isPlaying && videoRef.current && audioRef.current) {
@@ -106,6 +137,38 @@ function App() {
       }, 100);
     }
   }, [showScrollContent]);
+
+  useEffect(() => {
+    if (!showScrollContent || !happyBirthdayRef.current) {
+      return;
+    }
+
+    const target = happyBirthdayRef.current;
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!fireworksTriggeredRef.current) {
+              fireworksTriggeredRef.current = true;
+              triggerFireworks();
+            }
+          } else {
+            fireworksTriggeredRef.current = false;
+          }
+        });
+      },
+      {
+        root: scrollContainerRef.current,
+        threshold: 0.5,
+      }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.unobserve(target);
+    };
+  }, [showScrollContent, triggerFireworks]);
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
@@ -224,7 +287,7 @@ function App() {
               <br></br>
               
               
-              <div className=" text-3xl font-semibold mb-10 drop-shadow">
+              <div className=" text-3xl font-semibold mb drop-shadow">
   So, I know we just met...
 </div>
 
@@ -240,10 +303,10 @@ function App() {
   So I made you this instead.
 </div>
 
-<span className="reveal block text-xl mb-10 drop-shadow">
+<div className="reveal block text-xl mb-10 drop-shadow">
   (you know that i had these exams and stuff going on, so i made  <br />as fast as i can
   and had no time to do more, but i hope you like it)
-</span>
+</div>
 
 <div className="reveal text-3xl font-semibold mb-20 drop-shadow">
   Hope you have an awesome day!
@@ -257,7 +320,10 @@ function App() {
           {/* Extra space at bottom to enable scrolling */}
           
           <div className="h-screen" />
-          <div className="text-white h-screen w-full flex flex-col items-center justify-center">
+          <div
+            ref={happyBirthdayRef}
+            className="text-white h-screen w-full flex flex-col items-center justify-center"
+          >
   <span className="text-white text-5xl font-bold animate drop-shadow-[0_0_12px_rgba(128,128,128,0.9)]">
     Happy Birthday!!
   </span>
